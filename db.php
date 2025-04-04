@@ -13,20 +13,18 @@ class Database {
     private function connectDB() {
         $this->conn = new mysqli($this->host, $this->user, $this->password, $this->dbName);
         
-        // Si hay error, en lugar de detener el script con die(), devolvemos un mensaje
+        // Si hay error, registramos pero NO enviamos nada al navegador
         if ($this->conn->connect_error) {
-            error_log("Error de conexión: " . $this->conn->connect_error);
-            echo json_encode(["error" => "No se pudo conectar a la base de datos"]);
-            exit(); // Salimos para evitar ejecuciones incorrectas
+            error_log("❌ Error de conexión: " . $this->conn->connect_error);
+            $this->conn = null; // importante para evitar errores posteriores
         }
     }
 
     public function prepare($sql) {
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
-            error_log("Error en prepare(): " . $this->conn->error);
-            echo json_encode(["error" => "Error en la consulta"]);
-            exit();
+            error_log("❌ Error en prepare(): " . $this->conn->error);
+            return false;
         }
         return $stmt;
     }
@@ -34,9 +32,8 @@ class Database {
     public function query($sql) {
         $result = $this->conn->query($sql);
         if (!$result) {
-            error_log("Error en query(): " . $this->conn->error);
-            echo json_encode(["error" => "Error en la consulta"]);
-            exit();
+            error_log("❌ Error en query(): " . $this->conn->error);
+            return false;
         }
         return $result;
     }
@@ -47,4 +44,3 @@ class Database {
         }
     }
 }
-?>

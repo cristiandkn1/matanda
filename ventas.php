@@ -4,20 +4,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar si el usuario ha iniciado sesión
-// Verificar si el usuario tiene rol "usuario"
+// Verificar si el usuario ha iniciado sesión y tiene rol "usuario"
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario') {
-    // Si no tiene permiso, redirigir o mostrar error
-    header('Location: login.php'); // o usar index.php, login.php, etc.
+    header('Location: login.php');
     exit;
 }
 
-// Conectar a la base de datos (solo si el usuario está autenticado)
 require_once 'db.php';
 date_default_timezone_set('America/Santiago');
 
 $database = new Database();
 $conn = $database->conn;
+
 // Obtener lista de productos visibles con descuento asociado
 $productos = [];
 $queryProductos = "SELECT 
@@ -40,10 +38,12 @@ if ($result) {
         $productos[] = $row;
     }
 } else {
-    die("Error en la consulta: " . $conn->error);
+    error_log("Error en la consulta de productos: " . $conn->error);
+    header("Location: error.php");
+    exit;
 }
 
-// ✅ Obtener montos desde metodo_pago_monto (CORRECCIÓN MÍNIMA)
+// Obtener montos desde metodo_pago_monto
 $montos = ["efectivo" => 0, "transferencia" => 0, "debito" => 0, "credito" => 0];
 
 $queryMontos = "SELECT metodo, SUM(monto) AS total FROM metodo_pago_monto GROUP BY metodo";
@@ -67,7 +67,9 @@ if ($resultMontos) {
         }
     }
 } else {
-    die("Error en la consulta de montos: " . $conn->error);
+    error_log("Error en la consulta de montos: " . $conn->error);
+    header("Location: error.php");
+    exit;
 }
 
 // Aplicar descuento manual adicional sin reemplazar descuentos anteriores
@@ -78,13 +80,9 @@ if (isset($_POST['manual_discount'])) {
     $manualDiscount = $_SESSION['manual_discount'] ?? 0;
 }
 
-// Cerrar conexión a la base de datos
+// Cerrar conexión
 $database->close();
 ?>
-
-
-
-
 
 
 

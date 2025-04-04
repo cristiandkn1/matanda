@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require_once 'db.php'; // Incluir la conexión a la base de datos
+date_default_timezone_set('America/Santiago');
 
 // Habilitar reporte de errores
 ini_set('display_errors', 1);

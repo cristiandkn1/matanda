@@ -1,35 +1,39 @@
 <?php
-require_once 'db.php'; // Conexión a la base de datos
+ob_end_clean(); // Limpiar todo lo anterior
+ob_start();
+
+require_once 'db.php';
 require_once __DIR__ . '/fpdf/fpdf.php';
 
-// Configurar la zona horaria correcta
-date_default_timezone_set('America/Santiago'); // Ajusta según tu zona horaria
+date_default_timezone_set('America/Santiago');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// Crear conexión
+// Limpiar caracteres incompatibles (como emojis)
+function limpiarTextoPDF($texto) {
+    return preg_replace('/[^\x20-\x7EñÑáéíóúÁÉÍÓÚüÜ]/u', '', $texto);
+}
+
 $database = new Database();
 $conn = $database->conn;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Obtener ventas del día actual que NO estén cerradas
 $fechaHoy = date('Y-m-d');
-$fechaInicio = date('Y-m-d 00:00:00');
-$fechaFin = date('Y-m-d 23:59:59');
+$fechaInicio = "$fechaHoy 00:00:00";
+$fechaFin = "$fechaHoy 23:59:59";
 
-// Consulta SQL con la nueva columna "descuento"
-$query = "SELECT vd.producto_idproducto, p.nombre AS producto, 
-                 SUM(vd.cantidad) AS cantidad, 
-                 vd.precio, 
-                 SUM(vd.descuento) AS descuento, 
-                 SUM(vd.subtotal) AS subtotal, 
-                 v.pago_idpago
-          FROM venta v
-          JOIN venta_detalle vd ON v.idventa = vd.venta_idventa
+// ✅ Consulta SIN agrupación: mostrar cada línea individual
+$query = "SELECT 
+            vd.cantidad, 
+            vd.precio, 
+            vd.descuento, 
+            vd.subtotal,
+            p.nombre AS producto,
+            v.pago_idpago
+          FROM venta_detalle vd
           JOIN producto p ON vd.producto_idproducto = p.idproducto
+          JOIN venta v ON vd.venta_idventa = v.idventa
           WHERE v.fecha BETWEEN ? AND ? AND v.cierre_id IS NULL
-          GROUP BY vd.producto_idproducto, vd.precio, v.pago_idpago";
+          ORDER BY v.idventa DESC";
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ss", $fechaInicio, $fechaFin);
@@ -38,98 +42,81 @@ $result = $stmt->get_result();
 
 $ventas = [];
 $totales = [
-    'ventas' => 0, 
-    'total' => 0, 
-    'descuento' => 0, 
-    'debito' => 0, 
-    'efectivo' => 0, 
-    'transferencia' => 0, 
-    'credito' => 0
+    'ventas' => 0, 'total' => 0, 'descuento' => 0,
+    'debito' => 0, 'efectivo' => 0, 'transferencia' => 0, 'credito' => 0
 ];
 
-// Mapeo de tipos de pago
-$tiposPago = [
-    '1' => 'Débito',
-    '2' => 'Efectivo',
-    '3' => 'Transferencia',
-    '4' => 'Crédito'
-];
+$tiposPago = ['1' => 'Débito', '2' => 'Efectivo', '3' => 'Transferencia', '4' => 'Crédito'];
 
 while ($row = $result->fetch_assoc()) {
-    $metodoPago = isset($tiposPago[$row['pago_idpago']]) ? $tiposPago[$row['pago_idpago']] : 'Desconocido';
-    
-    // Concatenamos el producto con el método de pago
-    $row['producto'] = $row['producto'] . ' - ' . $metodoPago;
-    
-    // Si no hay descuento, mostrar "-"
-    if ($row['descuento'] > 0) {
-        $row['precio_dcto'] = "$" . number_format(floor($row['precio'] - ($row['descuento'] / $row['cantidad'])), 0);
-    } else {
-        $row['precio_dcto'] = "-";
-    }
+    $row['metodo_pago'] = $tiposPago[$row['pago_idpago']] ?? 'Desconocido';
+    $row['producto'] .= ' - ' . $row['metodo_pago'];
+
+    $row['precio_dcto'] = ($row['descuento'] > 0 && $row['cantidad'] > 0)
+        ? "$" . number_format(floor($row['precio'] - ($row['descuento'] / $row['cantidad'])), 0)
+        : "-";
 
     $ventas[] = $row;
     $totales['total'] += floor($row['subtotal']);
     $totales['descuento'] += floor($row['descuento']);
     $totales['ventas']++;
 
-    // Contar tipos de pago
-    if ($row['pago_idpago'] == '1') {  
-        $totales['debito']++;
-    } elseif ($row['pago_idpago'] == '2') {  
-        $totales['efectivo']++;
-    } elseif ($row['pago_idpago'] == '3') {  
-        $totales['transferencia']++;
-    } elseif ($row['pago_idpago'] == '4') {  
-        $totales['credito']++;
+    switch ($row['pago_idpago']) {
+        case '1': $totales['debito']++; break;
+        case '2': $totales['efectivo']++; break;
+        case '3': $totales['transferencia']++; break;
+        case '4': $totales['credito']++; break;
     }
 }
 
-// Generar PDF con FPDF
+// 📄 GENERAR PDF
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
-$pdf->Cell(190, 12, "Reporte de Ventas del Dia ($fechaHoy)", 1, 1, 'C');
+$pdf->Cell(190, 12, "Reporte de Ventas del Día ($fechaHoy)", 1, 1, 'C');
 $pdf->Ln(8);
 
-// Encabezados de la tabla con más espacio
+// 🧾 Encabezados
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(85, 12, "Producto", 1); 
-$pdf->Cell(20, 12, "Cant.", 1, 0, 'C'); 
+$pdf->Cell(85, 12, "Producto", 1);
+$pdf->Cell(20, 12, "Cant.", 1, 0, 'C');
 $pdf->Cell(25, 12, "Precio", 1, 0, 'C');
-$pdf->Cell(30, 12, "Precio Dcto", 1, 0, 'C'); 
+$pdf->Cell(30, 12, "Precio Dcto", 1, 0, 'C');
 $pdf->Cell(30, 12, "Subtotal", 1, 0, 'C');
 $pdf->Ln();
 
-// Contenido de la tabla
+// 🧾 Contenido
 $pdf->SetFont('Arial', '', 12);
-foreach ($ventas as $venta) {
-    $pdf->Cell(85, 10, utf8_decode($venta['producto']), 1);
-    $pdf->Cell(20, 10, $venta['cantidad'], 1, 0, 'C');
-    $pdf->Cell(25, 10, "$" . number_format(floor($venta['precio']), 0), 1, 0, 'C');
-    $pdf->Cell(30, 10, $venta['precio_dcto'], 1, 0, 'C');
-    $pdf->Cell(30, 10, "$" . number_format(floor($venta['subtotal']), 0), 1, 0, 'C');
+foreach ($ventas as $v) {
+    $producto = limpiarTextoPDF($v['producto']);
+    $pdf->Cell(85, 10, utf8_decode($producto), 1);
+    $pdf->Cell(20, 10, $v['cantidad'], 1, 0, 'C');
+    $pdf->Cell(25, 10, "$" . number_format($v['precio'], 0), 1, 0, 'C');
+    $pdf->Cell(30, 10, $v['precio_dcto'], 1, 0, 'C');
+    $pdf->Cell(30, 10, "$" . number_format($v['subtotal'], 0), 1, 0, 'C');
     $pdf->Ln();
 }
 
-// Espacio antes del resumen
+// 🔽 Resumen
 $pdf->Ln(8);
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(190, 12, "Resumen del Dia", 1, 1, 'C');
+$pdf->Cell(190, 12, "Resumen del Día", 1, 1, 'C');
 
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(95, 10, "Total de Ventas: " . $totales['ventas'], 1);
-$pdf->Cell(95, 10, "Total Vendido: $" . number_format(floor($totales['total']), 0), 1);
+$pdf->Cell(95, 10, "Total de Ventas: {$totales['ventas']}", 1);
+$pdf->Cell(95, 10, "Total Vendido: $" . number_format($totales['total'], 0), 1);
 $pdf->Ln();
-$pdf->Cell(95, 10, "Total Descuentos: $" . number_format(floor($totales['descuento']), 0), 1);
+$pdf->Cell(95, 10, "Total Descuentos: $" . number_format($totales['descuento'], 0), 1);
 $pdf->Ln();
-$pdf->Cell(95, 10, "Pagos con Debito: " . $totales['debito'], 1);
-$pdf->Cell(95, 10, "Pagos con Efectivo: " . $totales['efectivo'], 1);
+$pdf->Cell(95, 10, "Pagos con Débito: {$totales['debito']}", 1);
+$pdf->Cell(95, 10, "Pagos con Efectivo: {$totales['efectivo']}", 1);
 $pdf->Ln();
-$pdf->Cell(95, 10, "Pagos con Transferencia: " . $totales['transferencia'], 1);
-$pdf->Cell(95, 10, "Pagos con Credito: " . $totales['credito'], 1);
+$pdf->Cell(95, 10, "Pagos con Transferencia: {$totales['transferencia']}", 1);
+$pdf->Cell(95, 10, "Pagos con Crédito: {$totales['credito']}", 1);
 $pdf->Ln();
 
-$pdf->Output();
+// 🔽 Salida
+ob_end_clean(); // Limpiar salida previa
+$pdf->Output("I", "reporte_ventas_dia.pdf");
 $conn->close();
-
+?>
