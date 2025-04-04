@@ -122,9 +122,11 @@ $database->close();
     <button id="clearDateFilter">Limpiar</button>
 
 </div>
-
 <!-- Contenedor único para mostrar el resumen de ventas -->
-<div id="salesSummary" class="summary-container"></div>
+<div id="salesSummary" class="summary-container">
+    <!-- Aquí se inyectará dinámicamente el contenido de resumen de ventas -->
+</div>
+
 <style>
     .summary-container {
         margin-top: 10px;
@@ -134,6 +136,9 @@ $database->close();
         border-radius: 5px;
         font-size: 1.2em;
         font-weight: bold;
+        position: relative;
+        left: 790px; /* ✅ Desplazamiento efectivo hacia la derecha */
+        display: inline-block; /* ✅ Asegura que se comporte como bloque ajustable */
     }
 
     .summary-details {
@@ -143,6 +148,7 @@ $database->close();
         margin-top: 5px;
     }
 </style>
+
 <!-- Contenedor para la tabla de historial de ventas -->
 <div class="table-container">
     <table id="salesHistoryTable" class="display">

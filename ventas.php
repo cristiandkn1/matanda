@@ -14,6 +14,8 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario') {
 
 // Conectar a la base de datos (solo si el usuario está autenticado)
 require_once 'db.php';
+date_default_timezone_set('America/Santiago');
+
 $database = new Database();
 $conn = $database->conn;
 // Obtener lista de productos visibles con descuento asociado

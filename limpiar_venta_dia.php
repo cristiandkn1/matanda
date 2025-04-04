@@ -9,6 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once 'db.php'; // Conexión a la base de datos
+date_default_timezone_set('America/Santiago');
 
 $database = new Database();
 $conn = $database->conn;
@@ -20,16 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_GET['debug'])) {
 }
 
 // 📌 Verificar si el usuario está autenticado
-if (!isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['correo'])) {
     echo "Acceso denegado. Debe iniciar sesión.";
     exit;
 }
 
 $admin_email = "vega@gmail.com";
-if ($_SESSION['user_email'] !== $admin_email) {
+if ($_SESSION['correo'] !== $admin_email) {
     echo "Acceso denegado. No tiene permisos para limpiar ventas.";
     exit;
 }
+
 
 // 📌 Leer los datos enviados como JSON
 $data = json_decode(file_get_contents("php://input"), true);
