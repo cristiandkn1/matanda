@@ -148,7 +148,7 @@ $database->close();
             <i class="fas fa-box"></i> Inventario
         </a></li>
         <li><a href="ventas.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-money-bill-wave"></i> Ventasss
+            <i class="fas fa-money-bill-wave"></i> Ventass
         </a></li>
         <li><a href="historial.php" style="color: white; text-decoration: none;">
             <i class="fas fa-file-alt"></i> Historial
