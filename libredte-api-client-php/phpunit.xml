@@ -1,0 +1,61 @@
+<phpunit
+    backupGlobals="true"
+    bootstrap="tests/bootstrap.php"
+    cacheDirectory="var/cache/phpunit"
+    processIsolation="true"
+    executionOrder="depends,defects"
+    colors="true"
+    testdox="true"
+    requireCoverageMetadata="true"
+    beStrictAboutCoverageMetadata="true"
+    beStrictAboutOutputDuringTests="false"
+    beStrictAboutChangesToGlobalState="true"
+    stopOnError="true"
+    stopOnFailure="true"
+    stopOnWarning="true"
+    stopOnDeprecation="true"
+    stopOnNotice="true"
+    failOnEmptyTestSuite="true"
+    failOnWarning="true"
+    failOnRisky="true"
+    failOnDeprecation="true"
+    failOnPhpunitDeprecation="true"
+    failOnNotice="true"
+>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+    <testsuites>
+        <testsuite name="dte-facturacion">
+            <directory>tests/dte_facturacion</directory>
+        </testsuite>
+        <testsuite name="lce-contabilidad">
+            <directory>tests/lce_contabilidad</directory>
+        </testsuite>
+        <testsuite name="pagos-cobros-mas">
+            <directory>tests/pagos_cobros_masivos</directory>
+        </testsuite>
+    </testsuites>
+    <coverage
+        ignoreDeprecatedCodeUnits="true"
+        pathCoverage="true"
+    >
+        <report>
+            <text
+                outputFile="var/tests-coverage.txt"
+                showUncoveredFiles="true"
+            />
+            <clover outputFile="var/tests-coverage.xml" />
+        </report>
+    </coverage>
+    <logging>
+        <testdoxText outputFile="var/tests-testdox.txt"/>
+    </logging>
+    <php>
+        <ini name="memory_limit" value="-1" />
+        <env name="LIBREDTE_URL" value="https://libredte.cl" />
+        <env name="LIBREDTE_RUT" value="76192083-9" />
+    </php>
+</phpunit>
