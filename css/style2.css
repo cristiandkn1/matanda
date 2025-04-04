@@ -1,0 +1,954 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #3c5535;
+
+    padding: 40px 0; /* Aumentado de 10px a 20px para hacerlo más grande */
+    color: white;
+    text-align: center;
+}
+
+/* Asegurar que la navegación se vea bien con el nuevo tamaño */
+header ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Espaciado entre los elementos del menú */
+}
+
+header ul li {
+    display: inline;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4rem; /* Aumenta el tamaño del texto del menú */
+}
+
+header ul li a.active,
+header ul li a:hover {
+    text-decoration: underline;
+}
+/* 📱 Estilos para móviles */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* Reduce el padding para que sea más pequeño */
+    }
+
+    header ul {
+        gap: 1rem; /* Reduce la separación entre elementos */
+    }
+
+    header ul li a {
+        font-size: 1rem; /* Reduce el tamaño del texto del menú */
+    }
+}
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #007bff;
+}
+
+/* Estilos para formularios */
+form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #216330;
+}
+
+/* Estilos para tablas */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #29743b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #ca2334;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #206831;
+}
+
+/* Select2 personalizado */
+.select2-container--default .select2-selection--single {
+    height: 38px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Fondo oscuro */
+#manualProductModal {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 9999; /* Asegura que esté sobre otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con transparencia */
+    overflow: hidden; /* Evita desplazamiento de fondo */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%; /* Ancho inicial para pantallas pequeñas */
+    max-width: 500px; /* Ancho máximo en pantallas grandes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
+    animation: fadeIn 0.3s ease-in-out; /* Animación */
+}
+
+/* Botón de cierre */
+.close {
+    color: #333; /* Color del icono de cierre */
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus {
+    color: #e74c3c; /* Cambiar color al pasar el cursor */
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Botón del formulario */
+.modal-content button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #28a745;
+}
+
+/* Campos del formulario */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        max-width: none;
+    }
+}
+
+
+
+/* Contenedor del botón logout */
+.logout-container {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+}
+
+/* Eliminar cualquier fondo no deseado del form */
+.logout-container form {
+    margin: 0;
+    padding: 0;
+    background: transparent; /* Asegurar que no tenga fondo blanco */
+    border: none;
+}
+
+/* Estilo del botón de logout */
+.logout-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    outline: none;
+}
+
+.logout-btn:hover {
+    background: darkred;
+}
+
+
+
+
+/* Estilo para Total sin IVA (fondo rojo con 30% de opacidad) */
+#cartTable tfoot tr#totalWithoutTaxRow {
+    background-color: rgba(255, 0, 0, 0.3); /* Rojo con un 30% de opacidad */
+}
+
+/* Aumentar el tamaño del texto del total con IVA */
+#cartTable tfoot tr#totalRow {
+    font-size: 1.5em; /* Aumentamos el tamaño de fuente del Total con IVA */
+    font-weight: bold;
+}
+
+/* Estilo para Total sin IVA (mantener el tamaño normal) */
+#cartTable tfoot tr#totalWithoutTaxRow {
+    font-size: 1em; /* Mantener el tamaño normal para Total sin IVA */
+}
+
+
+
+
+
+/* Centrar los elementos en el centro de la pantalla, pero un 15% más arriba */
+.payment-container {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    justify-content: center;
+    align-items: center;
+    height: 20vh; /* 35% de la altura de la pantalla para subirlos un 15% más arriba */
+    gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Estilo del selector de Método de Pago */
+#paymentMethod {
+    padding: 10px;
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde sutil */
+    background-color: #f8f9fa; /* Fondo claro */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    font-size: 1rem; /* Tamaño de la fuente */
+    width: 200px; /* Ancho fijo */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+#paymentMethod:focus {
+    background-color: #e9ecef; /* Fondo ligeramente más oscuro cuando está enfocado */
+}
+
+/* Estilo del botón de procesar venta */
+#processSale {
+    padding: 10px 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #28a745; /* Verde atractivo */
+    color: white;
+    font-size: 1.1rem; /* Un poco más grande */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+#processSale:hover {
+    background-color: #218838; /* Cambia a un verde más oscuro al pasar el mouse */
+}
+/* Estiliza los botones de paginación de DataTables */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #007bff !important; /* Color azul similar a Bootstrap */
+    background-color: #f8f9fa !important; /* Fondo claro */
+    border: 1px solid #dee2e6 !important;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+/* Cambiar color cuando se pasa el cursor */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #007bff !important;
+    color: white !important;
+}
+
+/* Estiliza el botón activo */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+/* Deshabilitar botones inactivos */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d !important;
+    background: #e9ecef !important;
+    border-color: #dee2e6 !important;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        min-width: 800px; /* Fuerza el ancho para que parezca más grande */
+    }
+
+    .modal-content-edit-category, 
+    .modal-content-edit-brand, 
+    .modal-content-edit-discount {
+        width: 100%;
+        height: auto;
+    }
+
+    .table-container {
+        overflow-x: auto; /* Permite scroll lateral si es necesario */
+    }
+}
+
+#cerrarVentaDia {
+    background-color: #35d1dc; 
+        color: rgb(78, 75, 75);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+        margin-right: 40px; /* Espacio entre botones */
+        margin-left: 88%; /* 🔹 Modifica el porcentaje según lo que necesites */
+}
+
+/* Efecto hover */
+#cerrarVentaDia:hover {
+    background-color: #148e97; 
+    transform: scale(1.05); /* Pequeño efecto al pasar el mouse */
+}
+
+/* Efecto al hacer clic */
+#cerrarVentaDia:active {
+    transform: scale(0.95);
+}
+
+
+
+    /* Estilo para los botones */
+    #limpiarVentaDia {
+        background-color: #35dc43; 
+        color: rgb(78, 75, 75);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+        margin-right: 40px; /* Espacio entre botones */
+        margin-left: 88%; /* 🔹 Modifica el porcentaje según lo que necesites */
+
+    }
+
+     #limpiarVentaDia:hover {
+        background-color: #86dc35; 
+        transform: scale(1.05);
+    }
+
+    #cerrarVentaDia:active, #limpiarVentaDia:active {
+        transform: scale(0.95);
+    }
+
+
+
+
+    #voucherContainer {
+        display: none;
+        margin-top: 10px;
+    }
+    
+    #voucherContainer label {
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+    }
+    
+    #voucherCode {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    #voucherCode:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+    
+
+
+
+
+
+
+
+
+/* Monto de la caja */
+.caja-monto {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end; /* Alinea el texto a la derecha */
+    padding-right: 80px; /* Ajusta la distancia de la derecha */
+}
+
+
+
+/* Botón "Hacer Caja" */
+.btn-hacer-caja {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: block;
+    margin-left: 90%; /* Mueve el botón a la derecha */
+}
+
+.btn-hacer-caja:hover {
+    background-color: #0056b3;
+}
+
+/* Modal de la caja */
+.modal-caja {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-caja-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de cerrar modal */
+.modal-caja-cerrar {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Estilos del input en el modal */
+.modal-caja-input {
+    width: 90%;
+    padding: 8px;
+    font-size: 14px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-caja-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botón para guardar monto de la caja */
+.btn-guardar-caja {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-guardar-caja:hover {
+    background-color: #218838;
+}
+
+
+
+.monto-pago {
+    background-color: #f3f3f3; /* Fondo gris claro */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 14px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    min-width: 120px; /* Ancho mínimo uniforme */
+    display: inline-block; /* Evita que ocupen el ancho completo */
+    margin: 5px; /* Espaciado entre los elementos */
+}
+
+.btn-limpiar-caja {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-limpiar-caja:hover {
+    background-color: #c82333;
+}
+
+.btn-limpiar-caja {
+    background-color: #dd600c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+
+
+
+
+/* Estilos para el modal de ventas */
+.modal-ventas {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-ventas-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+/* Botón de cerrar modal */
+.closeVentas {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+/* Campo de búsqueda */
+.input-busqueda {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Botón de selección de venta */
+.seleccionarVenta {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+}
+
+.seleccionarVenta:hover {
+    background: #218838;
+}
+/* Ajustar tamaño del buscador */
+#buscadorVentas {
+    width: 80%; /* Reducir el ancho */
+    max-width: 300px; /* No exceder 300px */
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block; /* Evita que se expanda en línea */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ----------------------------- */
+/* ESTILOS PARA LA TABLA DE VENTAS */
+/* ----------------------------- */
+#tablaVentas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#tablaVentas th, #tablaVentas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#tablaVentas th {
+    background-color: #007bff;
+    color: white;
+}
+
+.tabla-container {
+    max-height: 300px; /* Ajusta la altura máxima de la tabla */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* ----------------------------- */
+/* ESTILOS PARA LA TABLA DE REPARTO */
+/* ----------------------------- */
+.table-container {
+    max-width: 1500px; /* Ajusta el ancho de la tabla */
+    margin: 20px auto; /* Centra la tabla */
+    padding: 10px;
+}
+
+#tablaReparto {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px; /* Hace que la tabla sea más compacta */
+}
+
+#tablaReparto th {
+    background-color: #343a40;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+#tablaReparto td {
+    padding: 6px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Reduce el tamaño de la tabla de reparto */
+#tablaReparto th, #tablaReparto td {
+    font-size: 18px;
+    padding: 6px;
+}
+
+
+
+#abrirModalVentas {
+    background-color: #007bff; /* Azul vibrante */
+    color: white; /* Texto en blanco */
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#abrirModalVentas:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
+
+#abrirModalVentas:active {
+    transform: scale(0.95);
+}
+
+
+.seleccionarVenta {
+    background-color: #28a745; /* Verde vibrante */
+    color: white;
+    font-size: 14px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.seleccionarVenta:hover {
+    background-color: #218838; /* Verde más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
+
+.seleccionarVenta:active {
+    transform: scale(0.95);
+}
+
+
+/* Botón Ajustar Reparto */
+.ajustarReparto {
+    background-color: #007bff; /* Azul */
+    color: white;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ajustarReparto:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.ajustarReparto:active {
+    transform: scale(0.95);
+}
+
+/* Botón Eliminar */
+.btnEliminar {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btnEliminar:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.btnEliminar:active {
+    transform: scale(0.95);
+}
+
+/* ✅ Estilos para los modales de valores de reparto */
+.modal-valores {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-valores-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Botón para cerrar */
+.close-valores {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ✅ Estilos para inputs y botones */
+.modal-valores-content input,
+.modal-valores-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.modal-valores-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-valores-content button:hover {
+    background-color: #0056b3;
+}
+
+
+.boton-azul {
+    background-color: #007bff; /* Azul */
+    color: rgb(255, 255, 255); /* Texto blanco */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .boton-azul:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+    transform: scale(1.03); /* Efecto de expansión */
+  }
+
+ 

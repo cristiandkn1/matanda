@@ -1,0 +1,905 @@
+/* Estilo básico para el encabezado */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #838181;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+/* Estilo para la lista */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    background-color: #3c5535;
+    padding: 40px 0; /* Aumentado de 10px a 20px para hacerlo más grande */
+    color: white;
+    text-align: center;
+}
+
+/* Asegurar que la navegación se vea bien con el nuevo tamaño */
+header ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Espaciado entre los elementos del menú */
+}
+
+header ul li {
+    display: inline;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4rem; /* Aumenta el tamaño del texto del menú */
+}
+
+@media (max-width: 768px) {
+    body {
+        min-width: 800px; /* Fuerza el ancho para que parezca más grande */
+    }
+
+    .modal-content-edit-category, 
+    .modal-content-edit-brand, 
+    .modal-content-edit-discount {
+        width: 100%;
+        height: auto;
+    }
+
+    .table-container {
+        overflow-x: auto; /* Permite scroll lateral si es necesario */
+    }
+}
+
+
+/* 📱 Estilos para móviles */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* Reduce el padding para que sea más pequeño */
+    }
+
+    header ul {
+        gap: 1rem; /* Reduce la separación entre elementos */
+    }
+
+    header ul li a {
+        font-size: 1rem; /* Reduce el tamaño del texto del menú */
+    }
+}
+        /* Estilos para el botón Agregar Categoría */
+/* Estilo para cada ítem de la lista */
+li {
+    margin: 0 0px;
+}
+
+/* Estilo para los enlaces */
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Efecto hover para los enlaces */
+a:hover {
+    color: #4CAF50;
+}
+/* Estilos para el botón Agregar Categoría */
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #bbb9b98c;
+    color: #333;
+}
+
+.buttoncategory {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Relleno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    margin: 10px; /* Espaciado */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+.buttoncategory:hover {
+    background-color: #45a049; /* Fondo más oscuro cuando pasa el mouse */
+}
+
+/* Estilos para el botón Agregar Marca */
+.buttonmarca {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Relleno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    margin: 10px; /* Espaciado */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+.buttonmarca:hover {
+    background-color: #45a049; /* Fondo más oscuro cuando pasa el mouse */
+}
+
+/* Estilos para el botón Agregar Descuento */
+.buttondescuento {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Relleno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    margin: 10px; /* Espaciado */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+.buttondescuento:hover {
+    background-color: #45a049; /* Fondo más oscuro cuando pasa el mouse */
+}
+
+
+       /* Estilo para el modal de añadir producto */
+/* Estilos para el fondo del modal (oscurecido) */
+.modalproductoadd {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 600px;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* Añadido para aplicar el transform */
+    top: 9%; /* Ajusta el top para dejar espacio desde la parte superior */
+    transform: translateY(-30%); /* Mueve el modal más hacia arriba */
+}
+
+
+/* Resto de los estilos */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #2e7431;
+}
+
+/* Estilos generales para los botones */
+.button-group {
+    text-align: center;
+    margin-bottom: 15px; /* Espaciado entre grupos */
+}
+
+/* Estilos para los botones de Añadir */
+#openModalButton,
+#openBrandModalButton,
+#openDiscountModalButton {
+    display: inline-block;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 5px;
+    font-size: 17.6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    transform: scale(1.1);
+    margin: 10px 15px; /* Espaciado entre botones */
+}
+
+/* Colores específicos para cada botón */
+#openModalButton {
+    background-color: #fdf902; /* Amarillo */
+    color: rgb(3, 3, 3);
+}
+/* Estilos para los botones de Editar (Más pequeños y debajo) */
+.edit-buttons button {
+    display: inline-block;
+    padding: 8px 16px; /* Más pequeño */
+    font-size: 15px; /* Reducimos el tamaño de fuente */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 5px 10px; /* Espaciado menor */
+}
+#openModalButton:hover {
+    background-color: #c3d104;
+}
+
+#openBrandModalButton {
+    background-color: #2196F3; /* Azul */
+}
+
+#openBrandModalButton:hover {
+    background-color: #1976D2;
+}
+
+#openDiscountModalButton {
+    background-color: #00ff2a;
+}
+
+#openDiscountModalButton:hover {
+    background-color: #26e600;
+}
+
+
+#editBrandModalButton { background-color: #aad608; color: rgb(10, 0, 0); }
+#editDiscountModalButton { background-color: #9bda08; color: rgb(2, 2, 2); }
+#editBrandModalButton:hover { background-color: #c8d600; }
+#editDiscountModalButton:hover { background-color: #c8d600; }
+/* Ajuste para que los botones se centren correctamente */
+main {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ---------------------------------------------------------------------------Contenedor para centrar la tabla y ajustar márgenes */
+#tableContainer {
+    width: 93%; /* Reduce el ancho de la tabla al 80% del contenedor */
+    margin: 2% auto 0; /* Baja la tabla un 30% hacia abajo y centra horizontalmente */
+    padding: 10px; /* Espaciado interno opcional */
+    background-color: #f9f9f9; /* Fondo para que destaque (opcional) */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para que destaque */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Ajuste de la tabla en sí */
+#productTable {
+    width: 100%; /* La tabla ocupará todo el ancho del contenedor */
+    border-collapse: collapse; /* Elimina el espacio entre celdas */
+}
+
+/* Encabezado de la tabla */
+#productTable th {
+    background-color: #28a745;
+    color: white; /* Texto blanco */
+    padding: 10px;
+    text-align: center;
+    
+}
+
+/* Celdas de la tabla */
+#productTable td {
+    padding: 8px;
+    text-align: center;
+}
+
+/* Rayado alternado para filas */
+#productTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+/* Espaciado entre controles y la tabla */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px; /* Ajusta el valor según prefieras */
+}
+
+.dataTables_filter input {
+    width: auto !important;
+    padding: 5px !important;
+    border: 1px solid #ccc !important;
+}
+#productTable_filter, #productTable_length {
+    position: relative;
+    z-index: 9999; /* Asegura que estén por encima de otros elementos */
+}
+
+
+/* ---------------------------------------------------------------------------Crear Producto */
+.modalproductoadd {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+
+
+
+/* ---------------------------------------------------------------------------Editar Producto */
+
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+
+/* Fondo oscuro para todos los modales *//* Fondo oscuro para todos los modales *//* Fondo oscuro para todos los modales *//* Fondo oscuro para todos los modales *//* Fondo oscuro para todos los modales */
+/* Fondo oscuro para todos los modales */
+.modal-category, .modal-brand, .modal-discount {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    z-index: 1000; /* Por encima de otros elementos */
+}
+
+/* Estilo específico para el contenido de cada modal */
+.modal-content-category, .modal-content-brand, .modal-content-discount {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    max-width: 600px;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 9%; /* Ajusta el top para posicionar el modal */
+    transform: translateY(40%); /* Ajusta para centrar más arriba */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+/* Botones específicos */
+.btn-category-modal, .btn-brand-modal, .btn-discount-modal {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-category-modal:hover, .btn-brand-modal:hover, .btn-discount-modal:hover {
+    background-color: #0056b3;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-delete-category,
+.btn-delete-brand,
+.btn-delete-discount {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete-category:hover,
+.btn-delete-brand:hover,
+.btn-delete-discount:hover {
+    background-color: #c0392b;
+}
+
+
+
+.modal-edit-category, .modal-edit-brand, .modal-edit-discount {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content-edit-category, .modal-content-edit-brand, .modal-content-edit-discount {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content-edit-category h2, .modal-content-edit-brand h2, .modal-content-edit-discount h2 {
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background-color: #45a049;
+}
+
+
+
+
+
+
+
+
+/* General para los modales de edición */
+.modal-edit-category, .modal-edit-brand, .modal-edit-discount {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto; /* Asegurar desplazamiento si el contenido excede */
+}
+
+/* Contenido del modal */
+.modal-content-edit-category, .modal-content-edit-brand, .modal-content-edit-discount {
+    background-color: #fff;
+    margin: 5% auto; /* Centrado en la pantalla */
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-height: 90vh; /* Asegurar que el contenido no exceda la pantalla */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: visible;
+}
+
+/* Dropdown de Select2 */
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-dropdown {
+    z-index: 1050 !important; /* Asegura que los dropdowns se muestren sobre el modal */
+}
+
+/* Botón de cierre */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Personalización de botones */
+.btn-save {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background-color: #45a049;
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-content-edit-category, .modal-content-edit-brand, .modal-content-edit-discount {
+        width: 90%;
+        height: auto;
+    }
+}
+
+
+
+/* ---------------------------------------------------------------Estilo para los botones de edición--------------------------------------------------- */
+.btn-edit-category, .btn-edit-brand, .btn-edit-discount {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit-category:hover, .btn-edit-brand:hover, .btn-edit-discount:hover {
+    background-color: #45a049; /* Verde más oscuro */
+}
+
+/* Botón para Eliminar Categoría */
+.btn-delete-category,
+.btn-delete-brand,
+.btn-delete-discount {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-delete-category:hover,
+.btn-delete-brand:hover,
+.btn-delete-discount:hover {
+    background-color: #c0392b;
+}
+
+/* Opcional: Personalización específica para cada botón */
+.btn-delete-category {
+    background-color: #e74c3c; /* Rojo claro */
+}
+
+.btn-delete-brand {
+    background-color: #e74c3c; /* Rojo claro */
+}
+
+.btn-delete-discount {
+    background-color: #e74c3c; /* Rojo claro */
+}
+
+/* Fondo del modal */
+.modal-delete {
+    display: none; /* Ocultar modales inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 1000;
+}
+
+.modal-content-delete {
+    background: white;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Botones */
+.btn-delete {
+    background-color: #e74c3c; /* Rojo para indicar acción de eliminar */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b; /* Cambia a un tono más oscuro al pasar el mouse */
+}
+
+
+/* Estilos generales para los botones de apertura de modales */
+button#openDeleteCategoryModal,
+button#openDeleteBrandModal,
+button#openDeleteDiscountModal {
+    background-color: #db3434; /* Azul claro */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: all 0.3s ease; /* Transición suave */
+    margin: 5px; /* Espaciado entre botones */
+}
+
+/* Efecto hover */
+button#openDeleteCategoryModal:hover,
+button#openDeleteBrandModal:hover,
+button#openDeleteDiscountModal:hover {
+    background-color: #2980b9; /* Azul más oscuro */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+    transform: translateY(-2px); /* Efecto de elevar el botón */
+}
+
+/* Efecto al hacer clic */
+button#openDeleteCategoryModal:active,
+button#openDeleteBrandModal:active,
+button#openDeleteDiscountModal:active {
+    background-color: #1c598a; /* Azul aún más oscuro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida */
+    transform: translateY(0); /* Vuelve a la posición original */
+}
+
+
+/* Estilos para el botón de edición */
+.btn-edit {
+    background-color: #f39c12; /* Naranja */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: all 0.3s ease; /* Transición suave */
+    margin: 5px; /* Espaciado alrededor del botón */
+}
+
+/* Efecto hover */
+.btn-edit:hover {
+    background-color: #e67e22; /* Naranja más oscuro */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+    transform: translateY(-2px); /* Efecto de elevar el botón */
+}
+
+/* Efecto al hacer clic */
+.btn-edit:active {
+    background-color: #d35400; /* Naranja intenso */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida */
+    transform: translateY(0); /* Vuelve a la posición original */
+}
+/* Estilo para el campo de búsqueda */
+.dataTables_filter input {
+    border: 1px solid #0a0a0a !important; /* Borde ligeramente más oscuro */
+    padding: 5px 10px; /* Aumentar el padding */
+    font-size: 14px; /* Aumentar el tamaño de la fuente */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #ffffff !important; /* Fondo blanco claro incluso cuando no está enfocado */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Animación al enfocar */
+}
+
+.dataTables_filter input:focus {
+    border-color: #003366 !important; /* Borde más oscuro al enfocar */
+    background-color: #f9f9f9 !important; /* Fondo ligeramente más claro al enfocar */
+}
+
+/* Estilo para el texto "Search:" */
+.dataTables_filter label {
+    font-weight: bold !important; /* Poner en negrita */
+    margin-right: 10px; /* Añadir espacio entre el texto y el campo */
+}
+
+
+#productDate,
+#productDescription,
+#productBrand,
+#productCategory {
+    display: none;
+}
+/* Asegurar que los botones sean visibles */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #007bff !important;  /* Azul Bootstrap */
+    background-color: #ffffff !important; /* Fondo blanco */
+    border: 1px solid #007bff !important;
+    padding: 6px 12px;
+    margin: 3px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Cuando el usuario pasa el cursor */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+/* Botón activo */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+/* Botón deshabilitado */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d !important;
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+    cursor: not-allowed;
+}
+
+/* Asegurar que el texto dentro de los botones sea visible */
+.dataTables_wrapper .dataTables_paginate .paginate_button a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+
+#desechosTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#desechosTable th {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#desechosTable td {
+    padding: 8px;
+    text-align: center;
+}
+
+#desechosTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px;
+}
+
+.dataTables_filter input {
+    width: auto !important;
+    padding: 5px !important;
+    border: 1px solid #ccc !important;
+}
+
+
+
+
+.btn-danger {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+}
+
+.btn-danger:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
+.btn-danger:active {
+    background-color: #990000;
+    transform: scale(1);
+}
+
+/* Contenedor para centrar los botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espaciado entre los botones */
+    margin-top: 20px;
+}
+
+
+.select-with-search {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}

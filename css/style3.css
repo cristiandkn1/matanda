@@ -1,0 +1,621 @@
+/* Archivo style3.css */
+
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e4e3e3;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #3c5535;
+    padding: 40px 0; /* Aumentado de 10px a 20px para hacerlo más grande */
+    color: white;
+    text-align: center;
+}
+
+/* Asegurar que la navegación se vea bien con el nuevo tamaño */
+header ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Espaciado entre los elementos del menú */
+}
+
+header ul li {
+    display: inline;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4rem; /* Aumenta el tamaño del texto del menú */
+}
+
+header ul li a:hover {
+    color: #4CAF50;
+}
+/* 📱 Estilos para móviles */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* Reduce el padding para que sea más pequeño */
+    }
+
+    header ul {
+        gap: 1rem; /* Reduce la separación entre elementos */
+    }
+
+    header ul li a {
+        font-size: 1rem; /* Reduce el tamaño del texto del menú */
+    }
+}
+button#applyFilters {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#applyFilters:hover {
+    background-color: #45a049;
+}
+
+/* Sección de filtros */
+.filters-container {
+    margin: 20px auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filters-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filters-container input[type="month"],
+.filters-container input[type="number"] {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}
+
+.filters-container input::placeholder {
+    color: #888;
+}
+
+.filters-container button#applyFilters {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filters-container button#applyFilters:hover {
+    background-color: #45a049;
+}
+
+/* Tablas */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #e8f5e9;
+}
+
+table tbody tr:hover {
+    background-color: #d4edda;
+    cursor: pointer;
+}
+
+/* Botones en la tabla */
+table .view-details, 
+table .edit-sale-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+table .view-details:hover, 
+table .edit-sale-btn:hover {
+    background-color: #45a049;
+}
+
+/* DataTables controles */
+.dataTables_wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenedor de tabla */
+.table-container {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Fondo oscuro (overlay) */
+#modalOverlay,
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Modal específico para editar */
+/* Fondo semitransparente detrás del modal */
+/* Fondo semitransparente detrás del modal */
+#editSaleOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro con opacidad */
+    z-index: 999; /* Colocar encima del contenido */
+    display: none; /* Ocultar por defecto */
+}
+
+/* Contenedor del modal */
+#editSaleModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Por encima del overlay */
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Botón de cerrar */
+#editSaleModal .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Botones en el modal */
+#editSaleModal .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#editSaleModal .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#editSaleModal .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+/* Estilo para el campo de búsqueda */
+/* Estilo para el campo de búsqueda */
+.dataTables_filter input {
+    border: 2px solid #050505 !important; /* Borde ligeramente más oscuro */
+    padding: 5px 10px; /* Aumentar el padding */
+    font-size: 14px; /* Aumentar el tamaño de la fuente */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #ffffff !important; /* Fondo blanco claro incluso cuando no está enfocado */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Animación al enfocar */
+}
+
+.dataTables_filter input:focus {
+    border-color: #003366 !important; /* Borde más oscuro al enfocar */
+    background-color: #f9f9f9 !important; /* Fondo ligeramente más claro al enfocar */
+}
+
+/* Estilo para el texto "Search:" */
+.dataTables_filter label {
+    font-weight: bold !important; /* Poner en negrita */
+    margin-right: 10px; /* Añadir espacio entre el texto y el campo */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Fondo oscuro para el modal */
+.overlay-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+    z-index: 9999; /* Asegura que esté por encima de la tabla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal de edición */
+.modal-editar-precio {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    max-width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Contenido del modal */
+.modal-editar-precio .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo para los inputs */
+.modal-editar-precio input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Efecto para el placeholder */
+.modal-editar-precio input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+}
+
+/* Botones */
+.modal-editar-precio button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Botón Guardar */
+.modal-editar-precio #guardarPrecio {
+    background-color: #28a745;
+    color: white;
+}
+
+.modal-editar-precio #guardarPrecio:hover {
+    background-color: #218838;
+}
+
+/* Botón Cancelar */
+.modal-editar-precio #cerrarModal {
+    background-color: #dc3545;
+    color: white;
+}
+
+.modal-editar-precio #cerrarModal:hover {
+    background-color: #c82333;
+}
+
+
+
+/* Botón de editar - estilo moderno */
+.btn-editar {
+    background-color: #3bb601da; /* Azul elegante */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el icono y el texto */
+    justify-content: center;
+}
+
+/* Agregar un pequeño icono */
+.btn-editar::before {
+    content: "✏️"; /* Icono de lápiz */
+    font-size: 16px;
+}
+
+/* Hover - Efecto cuando el cursor pasa encima */
+.btn-editar:hover {
+    background-color: #238f03; /* Azul más oscuro */
+    transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+/* Efecto al hacer clic */
+.btn-editar:active {
+    transform: scale(0.95);
+}
+
+
+
+
+/* Botón de limpiar mes - estilo similar pero en negro */
+.btn-limpiar-mes {
+    background-color: #111; /* Negro elegante */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    width: 100px; /* Ancho uniforme */
+}
+
+/* Icono para el botón Limpiar */
+.btn-limpiar-mes::before {
+    content: "🗑️"; /* Icono de basurero */
+    font-size: 16px;
+}
+
+/* Efectos */
+.btn-limpiar-mes:hover {
+    background-color: #222;
+    transform: scale(1.05);
+}
+
+.btn-limpiar-mes:active {
+    transform: scale(0.95);
+}
+
+/* Ajustes para la tabla */
+td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+/* Ajustar ancho de las celdas con botones */
+td:last-child {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Estiliza los botones de paginación de DataTables */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #007bff !important; /* Color azul similar a Bootstrap */
+    background-color: #f8f9fa !important; /* Fondo claro */
+    border: 1px solid #dee2e6 !important;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+/* Cambiar color cuando se pasa el cursor */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #007bff !important;
+    color: white !important;
+}
+
+/* Estiliza el botón activo */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+/* Deshabilitar botones inactivos */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #6c757d !important;
+    background: #e9ecef !important;
+    border-color: #dee2e6 !important;
+    cursor: not-allowed;
+}
+/* Mantiene la columna normal con verde */
+#tablaBodega td:nth-child(6), 
+#tablaBodega th:nth-child(6) {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+    font-weight: bold;
+}
+
+/* Si la ganancia es negativa, la fila se pondrá roja */
+.ganancia-negativa {
+    background-color: #f8828c !important; /* Rojo claro */
+    color: #921420 !important; /* Rojo oscuro */
+    font-weight: bold;
+}
+
+/* Si la ganancia es igual a total vendido, será rojo más claro */
+.ganancia-igual-total {
+    background-color: #f8ced1 !important; /* Rojo más claro */
+    color: #8a2c2c !important; /* Rojo intermedio */
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor de los filtros */
+/* Contenedor de los filtros */
+.filter-container {
+    background: transparent; /* Fondo transparente */
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 34px; /* 🔹 Más espacio lateral entre elementos */
+    flex-wrap: wrap;
+    max-width: 100%;
+    font-size: 14px;
+}
+
+/* Grupo de cada input */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px; /* 🔹 Asegura que los inputs no sean demasiado pequeños */
+    
+}
+
+/* Etiquetas */
+.filter-container label {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+    
+}
+
+/* Inputs */
+.filter-container input {
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 13px;
+    width: 100%;
+    margin-left: 8px; /* 🔹 Espacio lateral entre inputs y botón */
+
+}
+
+/* Botón con más espacio lateral */
+.filter-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s ease-in-out;
+    margin-top: 17px;
+    margin-left: 8px; /* 🔹 Espacio lateral entre inputs y botón */
+}
+
+.filter-container button:hover {
+    background-color: #0056b3;
+}
+
+#salesSummary {
+    position: absolute; /* Puedes cambiar a fixed o relative según donde lo necesites */
+    top: 16%; /* Ajusta la posición vertical */
+    right: 34%; /* Ajusta la posición horizontal */
+    background: #f4f4f4;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary-box {
+    color: #333;
+}

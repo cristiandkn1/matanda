@@ -1,0 +1,10 @@
+DirectoryIndex login.php
+
+RewriteEngine On
+
+# Si el usuario ya está autenticado, permitir index.php
+RewriteCond %{REQUEST_URI} !^/index.php$ [NC]
+RewriteCond %{REQUEST_URI} !^/logout.php$ [NC]  # Permitir también logout.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ login.php [L]
