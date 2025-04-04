@@ -176,14 +176,21 @@ foreach ($cart as $item) {
     }
 }
 
-    $conn->commit();
-    error_log("✅ Venta procesada exitosamente con reparto: $reparto");
+$conn->commit();
+error_log("✅ Venta procesada exitosamente con reparto: $reparto");
 
-    echo json_encode([
-        'success' => true,
-        'message' => 'Venta procesada correctamente.',
-        'totalAmount' => $totalAmount
-    ]);
+// ✅ Generar el XML de la venta
+require_once 'generar_xml_venta.php';
+$rutaXML = generarXMLVenta($conn, $ventaId);
+error_log("📄 XML generado en: $rutaXML");
+
+// ✅ Enviar respuesta final al frontend
+echo json_encode([
+    'success' => true,
+    'message' => 'Venta procesada correctamente.',
+    'totalAmount' => $totalAmount,
+    'xmlPath' => $rutaXML // (opcional: podés eliminar esta línea si no querés exponer la ruta al frontend)
+]);
 
 } catch (Exception $e) {
     $conn->rollback();
@@ -199,4 +206,5 @@ foreach ($cart as $item) {
     }
     $database->close();
 }
+
 ?>

@@ -1,0 +1,41 @@
+Encabezado:
+  IdDoc:
+    TipoDTE: 52
+    Folio: 1
+    TipoDespacho: 1
+    # IndTraslado: Código 4 indica entrega gratuita. - Largo máx: 1 - Tipo: NÚM.
+    IndTraslado: 4
+  Emisor:
+    RUTEmisor: 76192083-9
+    RznSoc: SASCO SpA
+    GiroEmis: Tecnología, informática y telecomunicaciones
+    Acteco: 726000
+    DirOrigen: Santa Cruz
+    CmnaOrigen: Santa Cruz
+  Receptor:
+    RUTRecep: 1234567-4
+    RznSocRecep: Venta al por menor de muebles
+    GiroRecep: Antonio Rosales
+    DirRecep: Calle 423
+    CmnaRecep: Santiago
+  Transporte:
+    Patente: ABCD12
+    RUTTrans: 2-7
+    Chofer:
+      RUTChofer: 1-9
+      NombreChofer: Pedro
+    DirDest: Calle 123
+    CmnaDest: Santiago
+Detalle:
+- NmbItem: Conectores RJ45
+  QtyItem: 450
+  PrcItem: 70
+
+# Esta sección no debe de ser considerada para un caso de ejemplo de emisión.
+Test:
+  ExpectedValues:
+    Encabezado:
+      Totales:
+        MntNeto: 31500
+        IVA: 5985
+        MntTotal: 37485

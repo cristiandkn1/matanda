@@ -1,0 +1,33 @@
+Encabezado:
+  IdDoc:
+    TipoDTE: 34
+    Folio: 1
+  Emisor:
+    RUTEmisor: 76192083-9
+    RznSoc: SASCO SpA
+    GiroEmis: Tecnología, informática y telecomunicaciones
+    Acteco: 726000
+    DirOrigen: Santa Cruz
+    CmnaOrigen: Santa Cruz
+  Receptor:
+    RUTRecep: 60803000-K
+    RznSocRecep: Servicio de Impuestos Internos
+    GiroRecep: Gobierno
+    DirRecep: Santiago
+    CmnaRecep: Santiago
+Detalle:
+  # IndExe: Indicador de facturación/exención. Indica si el producto o servicio
+  #         es exento o no afecto a impuesto o si ya ha sido facturado.
+  #         Largo máx: 1 - Tipo: NÚM.
+- IndExe: 1
+  NmbItem: Horas desarrollo
+  QtyItem: 5
+  PrcItem: 25000
+
+# Esta sección no debe de ser considerada para un caso de ejemplo de emisión.
+Test:
+  ExpectedValues:
+    Encabezado:
+      Totales:
+        MntExe: 125000
+        MntTotal: 125000
