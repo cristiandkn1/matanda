@@ -99,10 +99,6 @@ $database->close();
 
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -919,7 +915,7 @@ $(document).ready(function () {
             if (diasRestantes < 0) {
                 return `<span style="color: red;">Vencido: ${data}</span>`;
             } else if (diasRestantes <= 3) {
-                return `<span style="color: orange;">Por vencer: ${data}</span>`;
+                return `<span style="color: orange;">${data} Por vencer</span>`;
             } else {
                 return `<span>${data}</span>`;
             }
