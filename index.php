@@ -81,6 +81,7 @@ if ($mesActual !== $mesUltimaFecha) {
     // Registrar la nueva fecha en la tabla "reinicio_mes"
     $conn->query("INSERT INTO reinicio_mes (ultima_fecha) VALUES (CURDATE())");
 }
+date_default_timezone_set('America/Santiago');
 
 // 8️⃣ Cerrar conexión a la base de datos
 $database->close();
