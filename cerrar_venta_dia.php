@@ -46,7 +46,7 @@ $totales = [
     'debito' => 0, 'efectivo' => 0, 'transferencia' => 0, 'credito' => 0
 ];
 
-$tiposPago = ['1' => 'Débito', '2' => 'Efectivo', '3' => 'Transferencia', '4' => 'Crédito'];
+$tiposPago = ['1' => 'Debito', '2' => 'Efectivo', '3' => 'Transferencia', '4' => 'Credito'];
 
 while ($row = $result->fetch_assoc()) {
     $row['metodo_pago'] = $tiposPago[$row['pago_idpago']] ?? 'Desconocido';
@@ -73,7 +73,7 @@ while ($row = $result->fetch_assoc()) {
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
-$pdf->Cell(190, 12, "Reporte de Ventas del Día ($fechaHoy)", 1, 1, 'C');
+$pdf->Cell(190, 12, "Reporte de Ventas del Dia ($fechaHoy)", 1, 1, 'C');
 $pdf->Ln(8);
 
 // 🧾 Encabezados
@@ -100,7 +100,7 @@ foreach ($ventas as $v) {
 // 🔽 Resumen
 $pdf->Ln(8);
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(190, 12, "Resumen del Día", 1, 1, 'C');
+$pdf->Cell(190, 12, "Resumen del Dia", 1, 1, 'C');
 
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(95, 10, "Total de Ventas: {$totales['ventas']}", 1);
@@ -108,11 +108,11 @@ $pdf->Cell(95, 10, "Total Vendido: $" . number_format($totales['total'], 0), 1);
 $pdf->Ln();
 $pdf->Cell(95, 10, "Total Descuentos: $" . number_format($totales['descuento'], 0), 1);
 $pdf->Ln();
-$pdf->Cell(95, 10, "Pagos con Débito: {$totales['debito']}", 1);
+$pdf->Cell(95, 10, "Pagos con Debito: {$totales['debito']}", 1);
 $pdf->Cell(95, 10, "Pagos con Efectivo: {$totales['efectivo']}", 1);
 $pdf->Ln();
 $pdf->Cell(95, 10, "Pagos con Transferencia: {$totales['transferencia']}", 1);
-$pdf->Cell(95, 10, "Pagos con Crédito: {$totales['credito']}", 1);
+$pdf->Cell(95, 10, "Pagos con Credito: {$totales['credito']}", 1);
 $pdf->Ln();
 
 // 🔽 Salida
