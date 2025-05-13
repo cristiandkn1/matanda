@@ -204,71 +204,77 @@ foreach ($cart as $item) {
 
 
 
+// 🔸 Emitir DTE temporal de prueba a LibreDTE
+try {
+    $api_key = 'WDpUaWxpY0VFVTd0Uk04NXVsWVpqYjA4bDdMeW5IV1J0SA=='; // Tu API Key personal
+    $url = 'https://libredte.cl/api/dte/documentos/emitir?normalizar=1&formato=json&links=0&email=0';
 
+    $items = [];
+    foreach ($cart as $item) {
+        $items[] = [
+            'NmbItem' => htmlspecialchars($item['productName'], ENT_QUOTES, 'UTF-8'),
+            'QtyItem' => intval($item['quantity']),
+            'PrcItem' => round(floatval($item['productPrice']), 2)
+        ];
+    }
 
-
-
-// 🔸 Datos para enviar a LibreDTE
-$api_key = 'TU_API_KEY'; // Reemplaza con la API Key de la empresa cliente
-$rut_emisor = '12345678-9'; // RUT empresa sin puntos y con guion
-$url = 'https://libredte.cl/api/dte/documento';
-
-// 🔸 Armar lista de ítems
-$items = [];
-foreach ($cart as $item) {
-    $items[] = [
-        'NmbItem' => $item['productName'], // Ya viene con nombre + precio en tu JS
-        'QtyItem' => $item['quantity'],
-        'PrcItem' => round($item['productPrice'], 2),
-        'DescuentoMonto' => round(($item['productPrice'] - $item['discountPrice']) * $item['quantity'], 2)
-    ];
-}
-
-// 🔸 Estructura del DTE
-$data = [
-    'dte' => [
+    $data = [
         'Encabezado' => [
-            'IdDoc' => [
-                'TipoDTE' => 39 // Boleta electrónica afecta con IVA
-            ],
-            'Emisor' => [
-                'RUTEmisor' => $rut_emisor
-            ],
-            'Receptor' => [ // Consumidor Final (sin RUT)
+            'IdDoc' => ['TipoDTE' => 39],
+            'Emisor' => ['RUTEmisor' => '76088228-5'],
+            'Receptor' => [
                 'RUTRecep' => '66666666-6',
                 'RznSocRecep' => 'Consumidor Final',
                 'DirRecep' => 'Sin dirección',
                 'CmnaRecep' => 'Sin comuna'
             ]
         ],
-        'Detalle' => $items
-    ]
-];
+        'Detalle' => $items,
+        'LibreDTE' => [
+            'extra' => [
+                'dte' => [
+                    'Encabezado' => [
+                        'IdDoc' => [
+                            'TermPagoGlosa' => 'DTE de prueba - No tiene validez legal'
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
 
-// 🔸 Enviar a LibreDTE
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ' . $api_key,
-    'Content-Type: application/json'
-]);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $api_key,
+        'Content-Type: application/json'
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Solo para entorno de pruebas
 
-$response = curl_exec($ch);
-$res = json_decode($response, true);
-curl_close($ch);
+    $response = curl_exec($ch);
+    if (curl_errno($ch)) {
+        error_log("🔴 Error cURL LibreDTE: " . curl_error($ch));
+    }
+    curl_close($ch);
 
-// 🔸 Procesar respuesta
-if (!empty($res['pdf'])) {
-    error_log("✅ Boleta generada: " . $res['pdf']);
+    error_log("📨 Respuesta cruda de LibreDTE (emitir): " . $response);
+    $res = json_decode($response, true);
 
-    // OPCIONAL: guardar en tu base de datos
-    $stmt = $conn->prepare("UPDATE venta SET boleta_url = ? WHERE idventa = ?");
-    $stmt->bind_param("si", $res['pdf'], $ventaId);
-    $stmt->execute();
-} else {
-    error_log("⚠️ Error al generar boleta: " . $response);
+    if (!empty($res['pdf'])) {
+        error_log("✅ DTE de prueba generado correctamente: " . $res['pdf']);
+        $stmt = $conn->prepare("UPDATE venta SET boleta_url = ? WHERE idventa = ?");
+        $stmt->bind_param("si", $res['pdf'], $ventaId);
+        $stmt->execute();
+    } else {
+        error_log("⚠️ LibreDTE no devolvió PDF: " . $response);
+    }
+
+} catch (Exception $e) {
+    error_log("🔴 Excepción al emitir DTE de prueba: " . $e->getMessage());
 }
+
+
 
 
 
