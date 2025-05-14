@@ -54,39 +54,8 @@ $database->close();
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body>
+<?php include 'navbar.html'; ?>
 
-<header style="display: flex; justify-content: center; align-items: center; padding: 10px;  color: white; position: relative;">
-<nav>
-    <ul style="list-style: none; padding: 0; margin: 0; display: flex; gap: 20px;">
-        <li><a href="index.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-box"></i> Inventario
-        </a></li>
-        <li><a href="ventas.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-money-bill-wave"></i> Ventas
-        </a></li>
-        <li><a href="historial.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-file-alt"></i> Historial
-        </a></li>
-        <li><a href="bodega.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-chart-line"></i> Gestión
-        </a></li>
-        <li><a href="reparto.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-truck"></i> Reparto
-        </a></li>
-        <li><a href="desechos.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-trash"></i> Desechos
-        </a></li>
-        <li><a href="usuario.php" style="color: white; text-decoration: none;">
-            <i class="fas fa-user"></i> Usuarios
-        </a></li>
-    </ul>
-</nav>
-
-    <!-- Botón de cerrar sesión (Posicionable libremente) -->
-    <form action="logout.php" method="POST" style="position: absolute; right: 20px;">
-        <button type="submit" style="background: red; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Cerrar Sesión</button>
-    </form>
-</header>
 
 
 

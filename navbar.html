@@ -1,0 +1,101 @@
+<!-- navbar.html -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<header style="background-color: #0f0f1f; padding: 12px 20px; display: flex; justify-content: center; align-items: center; position: relative; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000;">
+  <nav>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 30px;">
+      <li><a href="index.php" class="nav-link">
+        <i class="fas fa-warehouse"></i> Inventario
+      </a></li>
+      <li><a href="ventas.php" class="nav-link">
+        <i class="fas fa-cash-register"></i> Ventas
+      </a></li>
+      <li><a href="historial.php" class="nav-link">
+        <i class="fas fa-clock-rotate-left"></i> Historial
+      </a></li>
+      <li><a href="bodega.php" class="nav-link">
+        <i class="fas fa-cubes"></i> Gestión
+      </a></li>
+      <li><a href="reparto.php" class="nav-link">
+        <i class="fas fa-truck-fast"></i> Reparto
+      </a></li>
+      <li><a href="desechos.php" class="nav-link">
+        <i class="fas fa-recycle"></i> Desechos
+      </a></li>
+      <li><a href="usuario.php" class="nav-link">
+        <i class="fas fa-users-gear"></i> Usuarios
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- Botón cerrar sesión moderno -->
+  <div style="position: absolute; right: 20px;">
+    <a href="logout.php" class="logout-btn">
+      <i class="fas fa-right-from-bracket"></i> Cerrar Sesión
+    </a>
+  </div>
+
+  <style>
+    .nav-link {
+      color: #a4f4a4;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #e9ffe9;
+      text-shadow: 0 0 6px #00ff88;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link:hover::after {
+      background: none;
+    }
+
+    .nav-link.active {
+      color: #e9ffe9;
+      text-shadow: 0 0 12px #00ff88;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .logout-btn {
+      background: linear-gradient(135deg, #00c851, #007e33);
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 10px rgba(0, 200, 81, 0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(135deg, #007e33, #004d1a);
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(0, 200, 81, 0.6);
+    }
+  </style>
+</header>
